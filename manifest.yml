@@ -1,0 +1,7 @@
+applications:
+- name: business-test
+  random-route: true
+  memory: 256M
+  disk_quota: 256M
+  buildpacks:
+    - nodejs_buildpack
