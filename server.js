@@ -10,10 +10,11 @@ const app = express();
 
 var payload = {"message" : "hey swastik"};
 
- auth = "Basic " + new Buffer.from('sb-clone-xbem-service-broker-1627750344644fc599c8874f380d864c-clone!b34165|xbem-service-broker-!b2436' + ":" + 'c64a70f3-25a0-4708-80f2-7157ecacd834$qJw2tIUPh4OIJX7iaup3uiBjxMXsF8nlDHtak61Y_b0=').toString("base64");
+auth = "Basic " + new Buffer.from(process.env.CLIENT_ID + ":" + process.env.CLIENT_SECRET).toString("base64");
 
-// auth1 = "Basic " + new Buffer.from(process.env.CLIENT_ID + ":" + process.env.CLIENT_SECRET).toString("base64");
-// console.log(process.env.CLIENT_ID);
+
+console.log(process.env.CLIENT_ID);
+console.log(process.env.CLIENT_SECRET);
 
 // var options = {
 //     method: 'GET',
@@ -110,8 +111,8 @@ function getServiceEntrySheeets() {
 		.top(3)
 		.execute({
         url: 'https://my300532-api.s4hana.ondemand.com:443',
-        username: 'CLOUD_COCKPIT',    
-        password: '7tKcasoLLHhZkMWxtfaVaVZxdNKFi~SNKaGSoXeY'
+        username: process.env.COMM_USER,    
+        password: process.env.PASSKEY
 		});
 }
 
