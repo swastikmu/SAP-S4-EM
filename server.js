@@ -6,7 +6,7 @@ const {ServiceEntrySheet} = require("@sap/cloud-sdk-vdm-service-entry-sheet-serv
 const xsenv = require("@sap/xsenv");
 const {Client} = require("@sap/xb-msg-amqp-v100");
 
-const app = express();
+const app = express(); 
 
 var payload = {"message" : "hey swastik"};
 
@@ -41,7 +41,8 @@ const getAuth = () => {
     var token;
     var options = {
         method: 'GET',
-        url: 'https://p1940372748trial.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials&response_type=token',
+        //url: 'https://p1940372748trial.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials&response_type=token',
+        url: process.env.TOKEN_ENDPOINT,
         headers: {
             'cache-control': 'no-store',
             'Content-Type': 'application/json;charset=UTF-8',
@@ -69,7 +70,8 @@ const sendMessage = (payload, token) => {
     let dataPayload = payload;
     var options = {
         method: 'POST',
-        url: 'https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com/messagingrest/v1/topics/topic1/messages',
+       // url: 'https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com/messagingrest/v1/topics/topic1/messages',
+        url: process.env.TOPIC_ENDPOINT,
         headers: {
             'Content-Type': 'application/json',
              Authorization: 'Bearer ' + token,
@@ -110,7 +112,8 @@ function getServiceEntrySheeets() {
 		.getAll()
 		.top(3)
 		.execute({
-        url: 'https://my300532-api.s4hana.ondemand.com:443',
+       // url: 'https://my300532-api.s4hana.ondemand.com:443',
+        url: process.env.HOSt,
         username: process.env.COMM_USER,    
         password: process.env.PASSKEY
 		});
